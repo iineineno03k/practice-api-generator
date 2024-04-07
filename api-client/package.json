@@ -1,0 +1,26 @@
+{
+  "name": "@example/todo-api",
+  "version": "0.1.0-SNAPSHOT",
+  "snapshotVersion": true,
+  "description": "",
+  "main": "src/client/todo/index.d.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "generate": "openapi-generator-cli generate -g typescript-fetch -i ../schema/openapi.yaml -o ./gen/client/todo",
+    "build": "tsc",
+    "prepublishOnly": "yarn generate && yarn build"
+  },
+  "author": "いね",
+  "license": "ISC",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.2.1"
+  }
+
+}

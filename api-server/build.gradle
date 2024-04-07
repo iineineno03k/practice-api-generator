@@ -1,0 +1,111 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.1.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.openapi.generator' version '6.6.0'
+}
+
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+ext {
+    openApiOutputDir = "$rootDir/build/generated/openapi"
+}
+
+sourceSets.main.java.srcDirs += ["$openApiOutputDir/src/main/java"]
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    api 'org.openapitools:jackson-databind-nullable:0.2.4'
+}
+
+group = 'com.example'
+version = '0.1.0-SNAPSHOT'
+description = 'server-api'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+    repositories {
+        maven {
+            url = "URL"
+            credentials(HttpHeaderCredentials) {
+                name = REPO_TOKEN_TYPE
+                value = REPOSITORY_TOKEN
+            }
+            authentication {
+                header(HttpHeaderAuthentication)
+            }
+        }
+
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
+openApiGenerate {
+    generatorName = 'spring'
+    inputSpec = "$rootDir/../schema/openapi.yaml"
+    outputDir = "$buildDir/generated/openapi"
+    apiPackage = 'com.example.todo.api'
+    modelPackage = 'com.example.todo.model'
+    invokerPackage = 'com.example.todo.invoke'
+    configOptions = [
+            useJakartaEe          : 'true',
+            useSpringBoot3        :'true',
+            parentGroupId         :'org.springframework.boot',
+            parentArtifactId      :'spring-boot-starter-parent',
+            parentVersion         : '3.1.1',
+            documentationProvider :'none',
+            annotationLibrary     :'none',
+
+            java8                 : 'true',
+            library               : 'spring-boot',
+            delegatePattern       : 'false',
+            dateLibrary           : 'java8',
+            interfaceOnly         : 'true',
+            useTags               : 'true',
+            serializableModel     : "true"
+    ]
+}
+
+task openApiGenerateHtml(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    validateSpec = true
+    generatorName = "html2"
+    inputSpec = "$rootDir/../schema/openapi.yaml"
+    additionalProperties = [
+            appName       : "todo",
+            appDescription: "Swagger UIによるAPI一覧生成"
+    ]
+    outputDir = "$rootDir/../public"
+}
+
+tasks.named('bootJar') {
+    enabled = false
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+compileJava.dependsOn tasks.openApiGenerateHtml
