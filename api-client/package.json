@@ -12,6 +12,14 @@
     "build": "tsc",
     "prepublishOnly": "yarn generate && yarn build"
   },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iineineno03k/todo-api-generator.git"
+  },
   "author": "いね",
   "license": "ISC",
   "devDependencies": {
@@ -22,5 +30,4 @@
   "dependencies": {
     "axios": "^1.2.1"
   }
-
 }

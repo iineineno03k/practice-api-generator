@@ -1,0 +1,31 @@
+openapi: 3.0.2
+info:
+  title: todo
+  version: 0.1.0
+  description: todo
+paths:
+  /user:
+    get:
+      tags:
+        - todo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: user
+      operationId: get-user
+components:
+  schemas:
+    User:
+      description: ''
+      type: object
+      properties:
+        name:
+          description: ''
+          type: string
+tags:
+  -
+    name: todo
+    description: ''

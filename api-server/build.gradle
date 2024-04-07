@@ -45,16 +45,13 @@ publishing {
     }
     repositories {
         maven {
-            url = "URL"
-            credentials(HttpHeaderCredentials) {
-                name = REPO_TOKEN_TYPE
-                value = REPOSITORY_TOKEN
-            }
-            authentication {
-                header(HttpHeaderAuthentication)
+            name = "todo-api-generator"
+            url = "https://github.com/iineineno03k/todo-api-generator"
+            credentials {
+                username = REPOSITORY_USER_NAME
+                password = REPOSITORY_TOKEN
             }
         }
-
     }
 }
 
