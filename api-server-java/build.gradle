@@ -10,7 +10,7 @@ plugins {
 repositories {
     mavenCentral()
     maven {
-        url 'https://maven.pkg.github.com/iineineno03k/todo-api-generator' // OWNERとREPOSITORYを適切な値に置き換える
+        url 'https://maven.pkg.github.com/iineineno03k/practice-api-generator'
         credentials {
             username = REPOSITORY_USER_NAME
             password = REPOSITORY_TOKEN
