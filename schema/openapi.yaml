@@ -1,31 +1,74 @@
-openapi: 3.0.2
+openapi: 3.0.1
 info:
-  title: todo
+  title: 練習用
+  description: ''
   version: 0.1.0
-  description: todo
+tags:
+  - name: player
 paths:
-  /user:
+  /players:
     get:
+      summary: 選手取得API
+      deprecated: false
+      description: ''
+      operationId: get-all-player
       tags:
-        - todo
+        - player
+      parameters: []
       responses:
         '200':
+          description: 成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: user
-      operationId: get-user
+                type: object
+                properties:
+                  players:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Player'
+                required:
+                  - players
+              examples:
+                '1':
+                  summary: 成功例
+                  value:
+                    players:
+                      - id: 1
+                        position: GK
+                        name:
+                          name: 円堂守
+                          furigana: えんどうまもる
+      security: []
 components:
   schemas:
-    User:
-      description: ''
+    Name:
       type: object
       properties:
         name:
-          description: ''
           type: string
-tags:
-  -
-    name: todo
-    description: ''
+          faker: 円堂守
+        furigana:
+          type: string
+          faker: えんどうまもる
+      required:
+        - name
+        - furigana
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID番号
+          faker: '1'
+        position:
+          type: string
+          description: ポジション
+          faker: GK
+        name:
+          $ref: '#/components/schemas/Name'
+      required:
+        - id
+        - position
+  securitySchemes: {}
+servers: []
