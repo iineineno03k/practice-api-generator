@@ -1,14 +1,14 @@
 {
-  "name": "@example/todo-api",
+  "name": "@example/practice",
   "version": "0.1.0-SNAPSHOT",
   "snapshotVersion": true,
   "description": "",
-  "main": "src/client/todo/index.d.ts",
+  "main": "src/client/example/index.d.ts",
   "files": [
     "src"
   ],
   "scripts": {
-    "generate": "openapi-generator-cli generate -g typescript-fetch -i ../schema/openapi.yaml -o ./gen/client/todo",
+    "generate": "openapi-generator-cli generate -g typescript-fetch -i ../schema/openapi.yaml -o ./gen/client/example",
     "build": "tsc",
     "prepublishOnly": "yarn generate && yarn build"
   },
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/iineineno03k/todo-api-generator.git"
+    "url": "git://github.com/iineineno03k/practice-api-generator.git"
   },
   "author": "いね",
   "license": "ISC",

@@ -37,7 +37,7 @@ dependencies {
     api 'org.openapitools:jackson-databind-nullable:0.2.4'
 }
 
-group = 'com.example'
+group = 'com.practice'
 version = '0.1.0-SNAPSHOT'
 description = 'server-api'
 
@@ -49,7 +49,7 @@ publishing {
     }
     repositories {
         maven {
-            url 'https://maven.pkg.github.com/iineineno03k/todo-api-generator'
+            url 'https://maven.pkg.github.com/iineineno03k/practice-api-generator'
 
             credentials {
                 username = REPOSITORY_USER_NAME
@@ -71,9 +71,9 @@ openApiGenerate {
     generatorName = 'spring'
     inputSpec = "$rootDir/../schema/openapi.yaml"
     outputDir = "$buildDir/generated/openapi"
-    apiPackage = 'com.example.todo.api'
-    modelPackage = 'com.example.todo.model'
-    invokerPackage = 'com.example.todo.invoke'
+    apiPackage = 'com.example.practice.api'
+    modelPackage = 'com.example.practice.model'
+    invokerPackage = 'com.example.practice.invoke'
     configOptions = [
             useJakartaEe          : 'true',
             useSpringBoot3        :'true',
@@ -93,20 +93,20 @@ openApiGenerate {
     ]
 }
 
-task openApiGenerateHtml(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    validateSpec = true
-    generatorName = "html2"
-    inputSpec = "$rootDir/../schema/openapi.yaml"
-    additionalProperties = [
-            appName       : "todo",
-            appDescription: "Swagger UIによるAPI一覧生成"
-    ]
-    outputDir = "$rootDir/../public"
-}
+// task openApiGenerateHtml(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+//     validateSpec = true
+//     generatorName = "html2"
+//     inputSpec = "$rootDir/../schema/openapi.yaml"
+//     additionalProperties = [
+//             appName       : "todo",
+//             appDescription: "Swagger UIによるAPI一覧生成"
+//     ]
+//     outputDir = "$rootDir/../public"
+// }
 
 tasks.named('bootJar') {
     enabled = false
 }
 
 compileJava.dependsOn tasks.openApiGenerate
-compileJava.dependsOn tasks.openApiGenerateHtml
+// compileJava.dependsOn tasks.openApiGenerateHtml
