@@ -16,17 +16,11 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@example'
-      - run: cd api-client
-
-      # .npmrcファイルを生成
-      - name: Create .npmrc in api-client
-        run: |
+      - run: |
+          cd api-client
           echo "@example:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-
-      # npm ciとnpm publishの実行
-      - run: |
           npm ci
           npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
