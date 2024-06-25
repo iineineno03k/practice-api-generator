@@ -41,6 +41,6 @@ jobs:
           chmod +x ./gradlew
           ./gradlew publish
         env:
-          GRADLE_USER_HOME.REPOSITORY_USER_NAME: ${{ github.actor }}
-          GRADLE_USER_HOME.REPOSITORY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG_GRADLE_PROJECT_REPOSITORY_USER_NAME: ${{ github.actor }}
+          ORG_GRADLE_PROJECT_REPOSITORY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
