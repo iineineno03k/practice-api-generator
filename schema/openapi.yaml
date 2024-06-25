@@ -47,10 +47,10 @@ components:
       properties:
         name:
           type: string
-          faker: 円堂守
+          example: 円堂守
         furigana:
           type: string
-          faker: えんどうまもる
+          example: えんどうまもる
       required:
         - name
         - furigana
@@ -60,11 +60,11 @@ components:
         id:
           type: integer
           description: ID番号
-          faker: '1'
+          example: '1'
         position:
           type: string
           description: ポジション
-          faker: GK
+          example: GK
         name:
           $ref: '#/components/schemas/Name'
       required:
