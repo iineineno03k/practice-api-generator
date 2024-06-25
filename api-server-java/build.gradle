@@ -37,7 +37,7 @@ dependencies {
     api 'org.openapitools:jackson-databind-nullable:0.2.4'
 }
 
-group = 'com.practice'
+group = 'com.example'
 version = '0.1.0-SNAPSHOT'
 description = 'server-api'
 
